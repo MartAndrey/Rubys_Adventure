@@ -6,3 +6,4 @@ Platzi's Unity Course Project "C# Course for Video Games"
 - Tilemaps and palettes
 - Input axis
 - Cinemachine
+- Prefabs

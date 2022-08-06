@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera aimCamera;
     Vector2 lookDirection;
 
+    // ======================BULLET========================
+    [SerializeField] Transform bullet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,26 +27,40 @@ public class PlayerController : MonoBehaviour
         Move();
 
         MoveAim();
-    }
 
-    // ======================MOVEMENT======================
-    void Move()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        if (Input.GetMouseButton(0))
+        {
+            Bullet();
+        }
 
-        Vector2 position = transform.position;
+        // ======================MOVEMENT======================
+        void Move()
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
 
-        position.x += speed * horizontal * Time.deltaTime;
-        position.y += speed * vertical * Time.deltaTime;
+            Vector2 position = transform.position;
 
-        transform.position = position;
-    }
+            position.x += speed * horizontal * Time.deltaTime;
+            position.y += speed * vertical * Time.deltaTime;
 
-    // =========================AIM========================
-    void MoveAim()
-    {
-        lookDirection = aimCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        aim.position = transform.position + (Vector3) lookDirection.normalized;
+            transform.position = position;
+        }
+
+        // =========================AIM========================
+        void MoveAim()
+        {
+            lookDirection = aimCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            aim.position = transform.position + (Vector3)lookDirection.normalized;
+        }
+
+        void Bullet()
+        {
+            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            Instantiate(bullet, transform.position, targetRotation);
+        }
     }
 }

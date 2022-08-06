@@ -5015,6 +5015,7 @@ MonoBehaviour:
   speed: 3
   aim: {fileID: 1526862794}
   aimCamera: {fileID: 519420031}
+  bullet: {fileID: 836346227494279160, guid: a9f7789e936fb314185b94dcb5f601c8, type: 3}
 --- !u!1 &1526862793
 GameObject:
   m_ObjectHideFlags: 0
