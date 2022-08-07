@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     // ======================BULLET========================
     [SerializeField] Transform bullet;
+    bool gunLoaded = true;
+    [SerializeField] float fireRate = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -28,39 +30,49 @@ public class PlayerController : MonoBehaviour
 
         MoveAim();
 
-        if (Input.GetMouseButton(0))
+        // ======================BULLET========================
+        if (Input.GetMouseButton(0) && gunLoaded)
         {
+            gunLoaded = false;
             Bullet();
+            StartCoroutine(ReloadGun()); 
         }
+    }
 
-        // ======================MOVEMENT======================
-        void Move()
-        {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+    // ======================MOVEMENT======================
+    void Move()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-            Vector2 position = transform.position;
+        Vector2 position = transform.position;
 
-            position.x += speed * horizontal * Time.deltaTime;
-            position.y += speed * vertical * Time.deltaTime;
+        position.x += speed * horizontal * Time.deltaTime;
+        position.y += speed * vertical * Time.deltaTime;
 
-            transform.position = position;
-        }
+        transform.position = position;
+    }
 
-        // =========================AIM========================
-        void MoveAim()
-        {
-            lookDirection = aimCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            aim.position = transform.position + (Vector3)lookDirection.normalized;
-        }
+    // =========================AIM========================
+    void MoveAim()
+    {
+        lookDirection = aimCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        aim.position = transform.position + (Vector3)lookDirection.normalized;
+    }
 
-        void Bullet()
-        {
-            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+    // ======================BULLET========================
+    void Bullet()
+    {
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
 
-            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            Instantiate(bullet, transform.position, targetRotation);
-        }
+        Instantiate(bullet, transform.position, targetRotation);
+    }
+
+    IEnumerator ReloadGun()
+    {
+        yield return new WaitForSeconds(1 / fireRate);
+        gunLoaded = true;
     }
 }
