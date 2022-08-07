@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    int health = 5;
+
     // ======================MOVEMENT======================
     [SerializeField] float speed = 3.0f;
 
@@ -74,5 +76,10 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1 / fireRate);
         gunLoaded = true;
+    }
+
+    public void TakeDamage()
+    {
+        health --;
     }
 }
