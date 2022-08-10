@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         {
             gunLoaded = false;
             Bullet();
-            StartCoroutine(ReloadGun()); 
+            StartCoroutine(ReloadGun());
         }
     }
 
@@ -82,11 +82,16 @@ public class PlayerController : MonoBehaviour
     // =======================HEALTH=======================
     public void TakeDamage()
     {
-        health --;
+        health--;
 
         if (health <= 0)
         {
             //TODO:
         }
+    }
+
+    public void ChangeHealth(int amount)
+    {
+        health += amount;
     }
 }
