@@ -7,6 +7,11 @@ public class Bullet : MonoBehaviour
     // ======================MOVEMENT======================
     [SerializeField] float speed = 5f;
 
+    // ======================POWERSHOT=====================
+    [SerializeField] int health = 3;
+    public bool powerShot;
+
+
     void Start()
     {
         Destroy(gameObject, 5);
@@ -22,7 +27,15 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().TakeDamage();
-            Destroy(gameObject);
+
+            if (!powerShot) Destroy(gameObject);
+
+            health--;
+
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

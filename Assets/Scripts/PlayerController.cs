@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     // ======================BULLET========================
     [SerializeField] Transform bullet;
     bool gunLoaded = true;
-    [SerializeField] float fireRate = 1;
+    [SerializeField] float fireRate = 1; 
+    bool powerShotEnable;
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +71,12 @@ public class PlayerController : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        Instantiate(bullet, transform.position, targetRotation);
+        Transform bulletClone = Instantiate(bullet, transform.position, targetRotation);
+
+        if (powerShotEnable)
+        {
+            bulletClone.GetComponent<Bullet>().powerShot = true;
+        }
     }
 
     IEnumerator ReloadGun()
@@ -93,5 +99,23 @@ public class PlayerController : MonoBehaviour
     public void ChangeHealth(int amount)
     {
         health += amount;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PowerUp"))
+        {
+            switch(other.GetComponent<PowerUp>().powerUpType)
+            {
+                case PowerUp.PowerUpType.FireRateIncrease:
+                    fireRate ++;
+                    break;
+
+                case PowerUp.PowerUpType.PowerShort:
+                    powerShotEnable = true; 
+                    break;
+            }
+            Destroy(other.gameObject, 0.1f);
+        }
     }
 }
