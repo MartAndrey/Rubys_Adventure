@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().TakeDamage();
+            other.GetComponent<Enemy>().TakeDamage();   
 
             if (!powerShot) Destroy(gameObject);
 

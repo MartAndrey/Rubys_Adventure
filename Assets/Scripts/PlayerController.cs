@@ -18,13 +18,18 @@ public class PlayerController : MonoBehaviour
     // ======================BULLET========================
     [SerializeField] Transform bullet;
     bool gunLoaded = true;
-    [SerializeField] float fireRate = 1; 
+    [SerializeField] float fireRate = 1;
     bool powerShotEnable;
+
+    // ====================INVULNERABLE=====================
+    [SerializeField] float timeInvulnerable = 3;
+    float invulnerableTimer;
+    bool invulnerable;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        invulnerableTimer = timeInvulnerable;
     }
 
     // Update is called once per frame
@@ -41,6 +46,20 @@ public class PlayerController : MonoBehaviour
             Bullet();
             StartCoroutine(ReloadGun());
         }
+
+        // ====================INVULNERABLE=====================
+        if (invulnerable)
+        {
+            invulnerableTimer -= Time.deltaTime;
+
+            if (invulnerableTimer <= 0)
+            {
+                invulnerable = false;
+            }
+        }
+
+        //=============================================================================================||
+        Debug.Log("Health: " + health);
     }
 
     // ======================MOVEMENT======================
@@ -88,11 +107,16 @@ public class PlayerController : MonoBehaviour
     // =======================HEALTH=======================
     public void TakeDamage()
     {
-        health--;
-
-        if (health <= 0)
+        if (invulnerable == false)
         {
-            //TODO:
+            invulnerableTimer = timeInvulnerable;
+            invulnerable = true;
+            health--;
+
+            if (health <= 0)
+            {
+                //TODO:
+            }
         }
     }
 
@@ -105,14 +129,14 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("PowerUp"))
         {
-            switch(other.GetComponent<PowerUp>().powerUpType)
+            switch (other.GetComponent<PowerUp>().powerUpType)
             {
                 case PowerUp.PowerUpType.FireRateIncrease:
-                    fireRate ++;
+                    fireRate++;
                     break;
 
                 case PowerUp.PowerUpType.PowerShort:
-                    powerShotEnable = true; 
+                    powerShotEnable = true;
                     break;
             }
             Destroy(other.gameObject, 0.1f);
