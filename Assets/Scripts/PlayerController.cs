@@ -22,14 +22,13 @@ public class PlayerController : MonoBehaviour
     bool powerShotEnable;
 
     // ====================INVULNERABLE=====================
-    [SerializeField] float timeInvulnerable = 3;
-    float invulnerableTimer;
+    [SerializeField] float invulnerableTime = 3;
     bool invulnerable;
 
     // Start is called before the first frame update
     void Start()
     {
-        invulnerableTimer = timeInvulnerable;
+
     }
 
     // Update is called once per frame
@@ -45,17 +44,6 @@ public class PlayerController : MonoBehaviour
             gunLoaded = false;
             Bullet();
             StartCoroutine(ReloadGun());
-        }
-
-        // ====================INVULNERABLE=====================
-        if (invulnerable)
-        {
-            invulnerableTimer -= Time.deltaTime;
-
-            if (invulnerableTimer <= 0)
-            {
-                invulnerable = false;
-            }
         }
 
         //=============================================================================================||
@@ -107,17 +95,22 @@ public class PlayerController : MonoBehaviour
     // =======================HEALTH=======================
     public void TakeDamage()
     {
-        if (invulnerable == false)
-        {
-            invulnerableTimer = timeInvulnerable;
-            invulnerable = true;
-            health--;
+        if (invulnerable) return;
 
-            if (health <= 0)
-            {
-                //TODO:
-            }
+        health--;
+        invulnerable = true;
+        StartCoroutine(MakeVulnerableAgain());
+
+        if (health <= 0)
+        {
+            //TODO:
         }
+    }
+
+    IEnumerator MakeVulnerableAgain()
+    {
+        yield return new WaitForSeconds(invulnerableTime);
+        invulnerable = false;
     }
 
     public void ChangeHealth(int amount)

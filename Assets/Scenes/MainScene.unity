@@ -5076,7 +5076,7 @@ MonoBehaviour:
   aimCamera: {fileID: 519420031}
   bullet: {fileID: 836346227494279160, guid: a9f7789e936fb314185b94dcb5f601c8, type: 3}
   fireRate: 1
-  timeInvulnerable: 3
+  invulnerableTime: 3
 --- !u!50 &1435128567
 Rigidbody2D:
   serializedVersion: 4
