@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // =======================HEALTH=======================
-    int health = 10;
+    int maxHealth = 5;
+    int currentHealth;
 
     // ======================MOVEMENT======================
     public float speed = 3.0f;
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -45,9 +46,6 @@ public class PlayerController : MonoBehaviour
             Bullet();
             StartCoroutine(ReloadGun());
         }
-
-        //=============================================================================================||
-        Debug.Log("Health: " + health);
     }
 
     // ======================MOVEMENT======================
@@ -97,14 +95,15 @@ public class PlayerController : MonoBehaviour
     {
         if (invulnerable) return;
 
-        health--;
+        currentHealth--;
         invulnerable = true;
         StartCoroutine(MakeVulnerableAgain());
 
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             //TODO:
         }
+        UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
 
     IEnumerator MakeVulnerableAgain()
@@ -115,7 +114,8 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeHealth(int amount)
     {
-        health += amount;
+        currentHealth += amount;
+        UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
