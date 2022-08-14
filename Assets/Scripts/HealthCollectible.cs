@@ -10,7 +10,7 @@ public class HealthCollectible : MonoBehaviour
     {
         PlayerController controller = other.GetComponent<PlayerController>();
 
-        if(controller != null)
+        if(controller != null && controller.Health < 5)
         {
             controller.ChangeHealth(amount);
             Destroy(gameObject, 0.1f);

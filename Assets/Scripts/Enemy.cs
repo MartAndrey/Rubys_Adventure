@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    int damage = -1;
+
     // ======================POSITION======================
     Transform player;
 
@@ -37,11 +39,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Player"))
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
+
+        if (player != null)
         {
-            other.GetComponent<PlayerController>().TakeDamage();
+            player.ChangeHealth(damage);
         }
     }
 }

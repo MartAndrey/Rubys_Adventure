@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     // =======================HEALTH=======================
     int maxHealth = 5;
     int currentHealth;
+    public int Health { get { return currentHealth; } }
 
     // ======================MOVEMENT======================
     public float speed = 3.0f;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
             Bullet();
             StartCoroutine(ReloadGun());
         }
+        Debug.Log(currentHealth);
     }
 
     // ======================MOVEMENT======================
@@ -91,18 +93,22 @@ public class PlayerController : MonoBehaviour
     }
 
     // =======================HEALTH=======================
-    public void TakeDamage()
+    public void ChangeHealth(int amount)
     {
-        if (invulnerable) return;
-
-        currentHealth--;
-        invulnerable = true;
-        StartCoroutine(MakeVulnerableAgain());
-
-        if (currentHealth <= 0)
+        if (amount < 0)
         {
-            //TODO:
+            if (invulnerable) return;
+
+            invulnerable = true;
+            StartCoroutine(MakeVulnerableAgain());
+
+            if (currentHealth <= 0)
+            {
+                //TODO:
+            }
         }
+
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
 
@@ -110,12 +116,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(invulnerableTime);
         invulnerable = false;
-    }
-
-    public void ChangeHealth(int amount)
-    {
-        currentHealth += amount;
-        UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
