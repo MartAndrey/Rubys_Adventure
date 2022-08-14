@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     int health = 10;
 
     // ======================MOVEMENT======================
-    [SerializeField] float speed = 3.0f;
+    public float speed = 3.0f;
 
     // =========================AIM========================
     [SerializeField] Transform aim;
