@@ -1,5 +1,5 @@
 # Rubys_Adventure
-Platzi's Unity Course Project "C# Course for Video Games"
+Platzi's Unity Course Project ""
 
 ### Developing
 
@@ -7,3 +7,4 @@ Platzi's Unity Course Project "C# Course for Video Games"
 - Input axis
 - Cinemachine
 - Prefabs
+- Canvas
