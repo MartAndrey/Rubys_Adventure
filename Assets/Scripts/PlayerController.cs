@@ -27,10 +27,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float invulnerableTime = 3;
     bool invulnerable;
 
+    // ====================ANIMATOR=====================
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -47,7 +51,8 @@ public class PlayerController : MonoBehaviour
             Bullet();
             StartCoroutine(ReloadGun());
         }
-        Debug.Log(currentHealth);
+
+        animator.SetFloat("Speed X", lookDirection.x);
     }
 
     // ======================MOVEMENT======================
