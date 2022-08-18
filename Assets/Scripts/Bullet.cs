@@ -4,29 +4,32 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // ======================MOVEMENT======================
-    [SerializeField] float speed = 5f;
-
     // ======================POWERSHOT=====================
     [SerializeField] int health = 3;
     public bool powerShot;
 
+    Rigidbody2D rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
         Destroy(gameObject, 5);
     }
-    // Update is called once per frame
-    void Update()
+
+    public void Launch(Vector2 direction, float force)
     {
-        transform.position += speed * transform.right * Time.deltaTime;
+        rb.AddForce(direction * force);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().TakeDamage();   
+            other.GetComponent<Enemy>().TakeDamage();
 
             if (!powerShot) Destroy(gameObject);
 

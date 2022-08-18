@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     Vector2 lookDirection;
 
     // ======================BULLET========================
-    [SerializeField] Transform bullet;
+    [SerializeField] GameObject bulletPrefab;
     bool gunLoaded = true;
     [SerializeField] float fireRate = 1;
     bool powerShotEnable;
@@ -31,30 +31,34 @@ public class PlayerController : MonoBehaviour
     // ====================ANIMATOR=====================
     Animator animator;
 
+    Rigidbody2D rb;
+    float horizontal;
+    float vertical;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
 
         Vector2 move = new Vector2(horizontal, vertical);
         Vector2 moveNormalize = move.normalized;
 
-        Move(horizontal, vertical);
         MoveAim();
 
         // ======================BULLET========================
-        if (Input.GetMouseButton(0) && gunLoaded)
+        if (Input.GetMouseButton(0) && gunLoaded && gunLoaded)
         {
+            Launch();
             gunLoaded = false;
-            Bullet();
             StartCoroutine(ReloadGun());
         }
 
@@ -75,36 +79,32 @@ public class PlayerController : MonoBehaviour
     }
 
     // ======================MOVEMENT======================
-    void Move(float x, float y)
+    void FixedUpdate()
     {
-        Vector2 position = transform.position;
+        Vector2 position = rb.position;
 
-        position.x += speed * x * Time.deltaTime;
-        position.y += speed * y * Time.deltaTime;
+        position.x += speed * horizontal * Time.deltaTime;
+        position.y += speed * vertical * Time.deltaTime;
 
-        transform.position = position;
+        rb.MovePosition(position);
+        Debug.Log(rb.velocity); 
     }
 
     // =========================AIM========================
     void MoveAim()
     {
         lookDirection = aimCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        aim.position = transform.position + (Vector3)lookDirection.normalized;
+        lookDirection.Normalize();
+        aim.position = (transform.position + Vector3.up * 0.5f) + (Vector3)lookDirection.normalized;
     }
 
     // ======================BULLET========================
-    void Bullet()
+    void Launch()
     {
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        GameObject projectileObject = Instantiate(bulletPrefab , rb.position + Vector2.up * 0.5f, Quaternion.identity);
 
-        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        Transform bulletClone = Instantiate(bullet, transform.position, targetRotation);
-
-        if (powerShotEnable)
-        {
-            bulletClone.GetComponent<Bullet>().powerShot = true;
-        }
+        Bullet projectile = projectileObject.GetComponent<Bullet>();
+        projectile.Launch(lookDirection, 300);
     }
 
     IEnumerator ReloadGun()
