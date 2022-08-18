@@ -10,11 +10,14 @@ public class Robot : MonoBehaviour
     [SerializeField] float changeTimer = 3;
     float timer;
 
+    Animator animator;
+
     float speed = 1;
 
     void Start()
     {
         timer = changeTimer;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -35,10 +38,14 @@ public class Robot : MonoBehaviour
         if (vertical)
         {
             position.y += speed * direction * Time.deltaTime;
+            animator.SetFloat("Speed Y", direction);
+            animator.SetFloat("Speed X", 0);
         }
         else
         {
             position.x += speed * direction * Time.deltaTime;
+            animator.SetFloat("Speed X", direction);
+            animator.SetFloat("Speed Y", 0);
         }
 
         transform.position = position;
