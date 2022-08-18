@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     // ======================MOVEMENT======================
     public float speed = 3.0f;
+    float direction;
 
     // =========================AIM========================
     [SerializeField] Transform aim;
@@ -40,8 +41,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
+        Vector2 move = new Vector2(horizontal, vertical);
+        Vector2 moveNormalize = move.normalized;
+
+        Move(horizontal, vertical);
         MoveAim();
 
         // ======================BULLET========================
@@ -52,19 +58,29 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ReloadGun());
         }
 
-        animator.SetFloat("Speed X", lookDirection.x);
+        // ====================ANIMATOR=====================
+        animator.SetFloat("Look X", lookDirection.x);
+        animator.SetFloat("Look Y", lookDirection.y);
+        animator.SetFloat("Speed X", moveNormalize.x);
+        animator.SetFloat("Speed Y", moveNormalize.y);
+
+        if (move.magnitude != 0.0)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
     }
 
     // ======================MOVEMENT======================
-    void Move()
+    void Move(float x, float y)
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
         Vector2 position = transform.position;
 
-        position.x += speed * horizontal * Time.deltaTime;
-        position.y += speed * vertical * Time.deltaTime;
+        position.x += speed * x * Time.deltaTime;
+        position.y += speed * y * Time.deltaTime;
 
         transform.position = position;
     }
