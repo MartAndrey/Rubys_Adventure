@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     bool gunLoaded = true;
     [SerializeField] float fireRate = 1;
-    bool powerShotEnable;
+    //bool powerShotEnable;
 
     // ====================INVULNERABLE=====================
     [SerializeField] float invulnerableTime = 3;
@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
         position.y += speed * vertical * Time.deltaTime;
 
         rb.MovePosition(position);
-        Debug.Log(rb.velocity); 
     }
 
     // =========================AIM========================
@@ -150,7 +149,7 @@ public class PlayerController : MonoBehaviour
                     break;
 
                 case PowerUp.PowerUpType.PowerShort:
-                    powerShotEnable = true;
+                    //powerShotEnable = true;
                     break;
             }
             Destroy(other.gameObject, 0.1f);
