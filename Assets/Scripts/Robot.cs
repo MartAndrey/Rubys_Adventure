@@ -13,6 +13,7 @@ public class Robot : MonoBehaviour
     Animator animator;
 
     float speed = 1;
+    int damage = -1;
 
     void Start()
     {
@@ -49,5 +50,15 @@ public class Robot : MonoBehaviour
         }
 
         transform.position = position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
+
+        if (player != null)
+        {
+            player.ChangeHealth(damage);
+        }
     }
 }

@@ -31,9 +31,13 @@ public class PlayerController : MonoBehaviour
     // ====================ANIMATOR=====================
     Animator animator;
 
+    // ====================PHYSICAL=====================
     Rigidbody2D rb;
     float horizontal;
     float vertical;
+
+    SpriteRenderer spriteRenderer;
+    [SerializeField] float blinkRate = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -100,7 +105,7 @@ public class PlayerController : MonoBehaviour
     // ======================BULLET========================
     void Launch()
     {
-        GameObject projectileObject = Instantiate(bulletPrefab , rb.position + Vector2.up * 0.5f, Quaternion.identity);
+        GameObject projectileObject = Instantiate(bulletPrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
 
         Bullet projectile = projectileObject.GetComponent<Bullet>();
         projectile.Launch(lookDirection, 300);
@@ -134,8 +139,23 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator MakeVulnerableAgain()
     {
+        StartCoroutine(BlinkRountine());
         yield return new WaitForSeconds(invulnerableTime);
         invulnerable = false;
+    }
+
+    IEnumerator BlinkRountine()
+    {
+        int t = 5;
+        while (t > 0)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(1 * blinkRate);
+
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(1 * blinkRate);
+            t--;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
