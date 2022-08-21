@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     [SerializeField] float blinkRate = 0.1f;
 
+    // =====================CAMERA=====================
+    CameraController camController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        camController = FindObjectOfType<CameraController>();
     }
 
     // Update is called once per frame
@@ -125,6 +129,7 @@ public class PlayerController : MonoBehaviour
             if (invulnerable) return;
 
             invulnerable = true;
+            camController.Shake();
             StartCoroutine(MakeVulnerableAgain());
 
             if (currentHealth <= 0)
@@ -150,10 +155,10 @@ public class PlayerController : MonoBehaviour
         while (t > 0)
         {
             spriteRenderer.enabled = false;
-            yield return new WaitForSeconds(1 * blinkRate);
+            yield return new WaitForSeconds(blinkRate);
 
             spriteRenderer.enabled = true;
-            yield return new WaitForSeconds(1 * blinkRate);
+            yield return new WaitForSeconds(blinkRate);
             t--;
         }
     }
