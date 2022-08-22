@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject projectileObject = Instantiate(bulletPrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
 
+        animator.SetTrigger("Lauch");
         Bullet projectile = projectileObject.GetComponent<Bullet>();
         projectile.Launch(lookDirection, 300);
     }
