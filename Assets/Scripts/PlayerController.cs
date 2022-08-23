@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -55,20 +54,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-
-        Vector2 move = new Vector2(horizontal, vertical);
-        Vector2 moveNormalize = move.normalized;
+        Vector2 move, moveNormalize;
+        ReadInput(out move, out moveNormalize);
 
         MoveAim();
 
         // ======================BULLET========================
-        if (Input.GetMouseButton(0) && gunLoaded && gunLoaded)
+        if (Input.GetMouseButton(0) && gunLoaded)
         {
             Launch();
-            gunLoaded = false;
-            StartCoroutine(ReloadGun());
         }
 
         // ====================ANIMATOR=====================
@@ -87,6 +81,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     // ======================MOVEMENT======================
     void FixedUpdate()
     {
@@ -98,6 +93,15 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(position);
     }
 
+    void ReadInput(out Vector2 move, out Vector2 moveNormalize)
+    {
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+
+        move = new Vector2(horizontal, vertical);
+        moveNormalize = move.normalized;
+    }
+    
     // =========================AIM========================
     void MoveAim()
     {
@@ -109,11 +113,14 @@ public class PlayerController : MonoBehaviour
     // ======================BULLET========================
     void Launch()
     {
+        gunLoaded = false;
         GameObject projectileObject = Instantiate(bulletPrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
 
         animator.SetTrigger("Lauch");
         Bullet projectile = projectileObject.GetComponent<Bullet>();
         projectile.Launch(lookDirection, 300);
+
+        StartCoroutine(ReloadGun());
     }
 
     IEnumerator ReloadGun()
