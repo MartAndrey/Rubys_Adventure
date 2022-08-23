@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour
 
             invulnerable = true;
             camController.Shake();
+            animator.SetTrigger("Hit");
             StartCoroutine(MakeVulnerableAgain());
 
             if (currentHealth <= 0)
