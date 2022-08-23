@@ -8,3 +8,4 @@ Platzi's Unity Course Project ""
 - Cinemachine
 - Prefabs
 - Canvas
+- Particle System
