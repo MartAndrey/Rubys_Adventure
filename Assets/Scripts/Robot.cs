@@ -12,17 +12,29 @@ public class Robot : MonoBehaviour
 
     Animator animator;
 
+    Rigidbody2D rb;
+
     float speed = 1;
     int damage = -1;
+
+    bool robotFixed = false;
+
+    [SerializeField] ParticleSystem smokeEffect;
 
     void Start()
     {
         timer = changeTimer;
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        if (robotFixed)
+        {
+            return;
+        }
+
         timer -= Time.deltaTime;
 
         if (timer <= 0)
@@ -34,6 +46,11 @@ public class Robot : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (robotFixed)
+        {
+            return;
+        }
+
         Vector2 position = transform.position;
 
         if (vertical)
@@ -50,6 +67,14 @@ public class Robot : MonoBehaviour
         }
 
         transform.position = position;
+    }
+
+    public void Fixed()
+    {
+        robotFixed = true;
+        rb.simulated = false;
+        animator.SetTrigger("Fixed");
+        smokeEffect.Stop();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

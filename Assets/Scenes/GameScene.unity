@@ -772,7 +772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 844689742}
   - component: {fileID: 844689743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5845,9 +5845,9 @@ GameObject:
   - component: {fileID: 1435128567}
   - component: {fileID: 1435128568}
   - component: {fileID: 1435128569}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -25,20 +25,15 @@ public class Bullet : MonoBehaviour
         rb.AddForce(direction * force);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Enemy"))
+        Robot enemy = other.collider.GetComponent<Robot>();
+
+        if (enemy != null)
         {
-            other.GetComponent<Enemy>().TakeDamage();
-
-            if (!powerShot) Destroy(gameObject);
-
-            health--;
-
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
+            enemy.Fixed();
         }
+        
+        Destroy(gameObject);
     }
 }
