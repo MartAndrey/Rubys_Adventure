@@ -21,11 +21,16 @@ public class Robot : MonoBehaviour
 
     [SerializeField] ParticleSystem smokeEffect;
 
+    AudioSource audioSource;
+    [SerializeField] AudioClip hit;
+    [SerializeField] AudioClip audioFixed;
+
     void Start()
     {
         timer = changeTimer;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -71,10 +76,14 @@ public class Robot : MonoBehaviour
 
     public void Fixed()
     {
+        audioSource.Stop();
+        audioSource.PlayOneShot(hit);
+        audioSource.PlayOneShot(audioFixed);
+
         robotFixed = true;
         rb.simulated = false;
         animator.SetTrigger("Fixed");
-        smokeEffect.Stop();
+        smokeEffect.Stop();    
     }
 
     private void OnCollisionEnter2D(Collision2D other)

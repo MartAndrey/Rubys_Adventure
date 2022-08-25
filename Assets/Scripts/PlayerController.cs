@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     // ====================INVULNERABLE=====================
     [SerializeField] float invulnerableTime = 3;
-    bool invulnerable;
+    public bool invulnerable;
 
     // ====================ANIMATOR=====================
     Animator animator;
@@ -41,7 +41,10 @@ public class PlayerController : MonoBehaviour
     // =====================CAMERA=====================
     CameraController camController;
 
-    // Start is called before the first frame update
+    // =====================AUDIO======================
+    AudioSource audioSource;
+    [SerializeField] AudioClip audioHit ;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -49,9 +52,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         camController = FindObjectOfType<CameraController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector2 move, moveNormalize;
@@ -74,10 +77,12 @@ public class PlayerController : MonoBehaviour
         if (move.magnitude != 0.0)
         {
             animator.SetBool("IsMoving", true);
+            if (!audioSource.isPlaying) audioSource.Play();
         }
         else
         {
             animator.SetBool("IsMoving", false);
+            if (audioSource.isPlaying) audioSource.Stop();
         }
     }
 
@@ -101,7 +106,7 @@ public class PlayerController : MonoBehaviour
         move = new Vector2(horizontal, vertical);
         moveNormalize = move.normalized;
     }
-    
+
     // =========================AIM========================
     void MoveAim()
     {
@@ -139,6 +144,8 @@ public class PlayerController : MonoBehaviour
             invulnerable = true;
             camController.Shake();
             animator.SetTrigger("Hit");
+            PlayAudio(audioHit);
+
             StartCoroutine(MakeVulnerableAgain());
 
             if (currentHealth <= 0)
@@ -188,5 +195,10 @@ public class PlayerController : MonoBehaviour
             }
             Destroy(other.gameObject, 0.1f);
         }
+    }
+
+    void PlayAudio(AudioClip audio)
+    {
+        AudioSource.PlayClipAtPoint(audio, transform.position);
     }
 }

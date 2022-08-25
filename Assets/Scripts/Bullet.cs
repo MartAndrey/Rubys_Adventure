@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     // ======================POWERSHOT=====================
-    [SerializeField] int health = 3;
+    //[SerializeField] int health = 3;
     public bool powerShot;
 
     Rigidbody2D rb;
