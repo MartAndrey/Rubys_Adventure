@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public Scenes currentScene = Scenes.Logo;
 
+    [SerializeField] GameObject transition;
+
     void Awake()
     {
         if (Instance == null)
@@ -18,7 +20,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-       DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void LogoScene()
@@ -71,5 +73,22 @@ public class GameManager : MonoBehaviour
         }
 
         this.currentScene = newScene;
+        HideCanvasTransition();
+    }
+
+    void HideCanvasTransition()
+    {
+        StartCoroutine(HideCanvasTransitionRutiner());
+    }
+
+    IEnumerator HideCanvasTransitionRutiner()
+    {
+        yield return new WaitForSeconds(3);
+        ChangeTransitionScene canva = FindObjectOfType<ChangeTransitionScene>();
+
+        if (canva != null)
+        {
+            canva.gameObject.SetActive(false);
+        }
     }
 }

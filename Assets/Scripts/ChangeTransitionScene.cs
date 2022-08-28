@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,15 @@ public class ChangeTransitionScene : MonoBehaviour
 {
     public static ChangeTransitionScene Instance;
 
+    Animator animator;
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -22,6 +26,8 @@ public class ChangeTransitionScene : MonoBehaviour
 
     public IEnumerator LoadSceneRutiner(string nameScene)
     {
+        yield return new WaitForSeconds(1);
+        animator.SetTrigger("Transition");
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(nameScene);
     }
