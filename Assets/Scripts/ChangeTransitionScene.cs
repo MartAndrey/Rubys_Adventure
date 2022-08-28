@@ -21,7 +21,10 @@ public class ChangeTransitionScene : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.Instance.currentScene == Scenes.Logo) GameManager.Instance.LogoScene();
+        if (GameManager.Instance.currentScene == Scenes.Logo)
+        {
+            GameManager.Instance.LogoScene();
+        }
     }
 
     public IEnumerator LoadSceneRutiner(string nameScene)

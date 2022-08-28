@@ -57,7 +57,8 @@ public class GameManager : MonoBehaviour
         }
         else if (newScene == Scenes.Menu)
         {
-            
+            ShowCanvasTransition();
+            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("GameScene"));   
         }
         else if (newScene == Scenes.Game)
         {
@@ -76,6 +77,17 @@ public class GameManager : MonoBehaviour
         HideCanvasTransition();
     }
 
+    void ShowCanvasTransition()
+    {
+         ChangeTransitionScene transition = FindObjectOfType<ChangeTransitionScene>();
+
+        if (transition != null)
+        {
+            Canvas canvas = transition.GetComponentInChildren<Canvas>();
+            canvas.enabled = true;
+        }
+    }
+
     void HideCanvasTransition()
     {
         StartCoroutine(HideCanvasTransitionRutiner());
@@ -84,11 +96,13 @@ public class GameManager : MonoBehaviour
     IEnumerator HideCanvasTransitionRutiner()
     {
         yield return new WaitForSeconds(3);
-        ChangeTransitionScene canva = FindObjectOfType<ChangeTransitionScene>();
 
-        if (canva != null)
+        ChangeTransitionScene transition = FindObjectOfType<ChangeTransitionScene>();
+
+        if (transition != null)
         {
-            canva.gameObject.SetActive(false);
+            Canvas canvas = transition.GetComponentInChildren<Canvas>();
+            canvas.enabled = false;
         }
     }
 }
