@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     // =====================AUDIO======================
     AudioSource audioSource;
     [SerializeField] AudioClip audioHit;
+    [SerializeField] AudioClip audioGameOver;
 
     void Start()
     {
@@ -166,7 +167,7 @@ public class PlayerController : MonoBehaviour
         invulnerable = false;
     }
 
-    IEnumerator BlinkRountine(int t = 5)
+    IEnumerator BlinkRountine(float t = 5)
     {
         while (t > 0)
         {
@@ -181,6 +182,7 @@ public class PlayerController : MonoBehaviour
 
     public void GameOver()
     {
+        PlayAudio(audioGameOver);
         rb.simulated = false;
         animator.enabled = false;
         StartCoroutine(BlinkRountine(10));

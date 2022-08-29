@@ -207,8 +207,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 469148446}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 469148448}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -532,29 +532,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469148447}
-  - component: {fileID: 469148446}
+  - component: {fileID: 469148448}
   m_Layer: 0
-  m_Name: MenuController
+  m_Name: MainMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &469148446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469148445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a1f9852089aaf42968575d647052c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageSound: {fileID: 771537543}
-  muteEnable: {fileID: 21300000, guid: 3b81b7072e3526041a0921e2f40362cc, type: 3}
-  muteDiseable: {fileID: 21300000, guid: 6603ebf4f6b49934eac8829b00867cff, type: 3}
 --- !u!4 &469148447
 Transform:
   m_ObjectHideFlags: 0
@@ -570,6 +555,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &469148448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469148445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a1f9852089aaf42968575d647052c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageSound: {fileID: 771537543}
+  muteEnable: {fileID: 21300000, guid: 3b81b7072e3526041a0921e2f40362cc, type: 3}
+  muteDiseable: {fileID: 21300000, guid: 6603ebf4f6b49934eac8829b00867cff, type: 3}
 --- !u!1 &521866890
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,8 +849,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 469148446}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 469148448}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: MuteAudio
         m_Mode: 1
         m_Arguments:
@@ -1390,8 +1390,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 469148446}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+      - m_Target: {fileID: 469148448}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:

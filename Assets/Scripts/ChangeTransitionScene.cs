@@ -27,11 +27,11 @@ public class ChangeTransitionScene : MonoBehaviour
         }
     }
 
-    public IEnumerator LoadSceneRutiner(string nameScene)
+    public IEnumerator LoadSceneRutiner(string nameScene, float time = 1)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
         animator.SetTrigger("Transition");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
         SceneManager.LoadScene(nameScene);
     }
 }

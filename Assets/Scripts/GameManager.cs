@@ -59,11 +59,12 @@ public class GameManager : MonoBehaviour
         else if (newScene == Scenes.Menu)
         {
             ShowCanvasTransition();
-            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("GameScene"));
+            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("MenuScene"));
         }
         else if (newScene == Scenes.Game)
         {
-
+            ShowCanvasTransition();
+            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("GameScene"));
         }
         else if (newScene == Scenes.Pause)
         {
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
         else if (newScene == Scenes.GameOver)
         {
             ShowCanvasTransition();
-            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("GameOverScene"));
+            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("GameOverScene", 1.35f));
         }
 
         this.currentScene = newScene;

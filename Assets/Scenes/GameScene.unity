@@ -6275,6 +6275,10 @@ PrefabInstance:
       propertyPath: aimCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 7754575049001216096, guid: 559bee9cb485bdb4eb46cd75b47e4319, type: 3}
+      propertyPath: audioGameOver
+      value: 
+      objectReference: {fileID: 8300000, guid: d1a4912e8a4d3a54584f6f3a73e762a4, type: 3}
     - target: {fileID: 7754575049001216097, guid: 559bee9cb485bdb4eb46cd75b47e4319, type: 3}
       propertyPath: m_Simulated
       value: 1

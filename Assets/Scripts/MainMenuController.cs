@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuController : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
     [SerializeField] Image imageSound;
 
@@ -12,7 +12,7 @@ public class MenuController : MonoBehaviour
     
     public void Play()
     {
-        GameManager.Instance.MenuScene();
+        GameManager.Instance.GameScene();
     }
 
     public void Exit()
