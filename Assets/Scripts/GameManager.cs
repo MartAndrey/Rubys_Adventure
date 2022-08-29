@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Scenes currentScene = Scenes.Logo;
 
     [SerializeField] GameObject transition;
+    [SerializeField] GameObject playerObject;
 
     void Awake()
     {
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
         else if (newScene == Scenes.Menu)
         {
             ShowCanvasTransition();
-            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("GameScene"));   
+            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("GameScene"));
         }
         else if (newScene == Scenes.Game)
         {
@@ -70,7 +71,8 @@ public class GameManager : MonoBehaviour
         }
         else if (newScene == Scenes.GameOver)
         {
-
+            ShowCanvasTransition();
+            StartCoroutine(ChangeTransitionScene.Instance.LoadSceneRutiner("GameOverScene"));
         }
 
         this.currentScene = newScene;
@@ -79,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     void ShowCanvasTransition()
     {
-         ChangeTransitionScene transition = FindObjectOfType<ChangeTransitionScene>();
+        ChangeTransitionScene transition = FindObjectOfType<ChangeTransitionScene>();
 
         if (transition != null)
         {

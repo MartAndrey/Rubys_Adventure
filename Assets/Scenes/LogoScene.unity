@@ -524,6 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScene: 0
   transition: {fileID: 5235713892323547645, guid: cb974b49ced951948b6997db3cfa1d11, type: 3}
+  playerObject: {fileID: 7754575049001216101, guid: 559bee9cb485bdb4eb46cd75b47e4319, type: 3}
 --- !u!4 &1461530463
 Transform:
   m_ObjectHideFlags: 0

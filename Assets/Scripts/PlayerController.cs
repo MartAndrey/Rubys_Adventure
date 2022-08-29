@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     // =====================AUDIO======================
     AudioSource audioSource;
-    [SerializeField] AudioClip audioHit ;
+    [SerializeField] AudioClip audioHit;
 
     void Start()
     {
@@ -147,15 +147,16 @@ public class PlayerController : MonoBehaviour
             PlayAudio(audioHit);
 
             StartCoroutine(MakeVulnerableAgain());
-
-            if (currentHealth <= 0)
-            {
-                //TODO:
-            }
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            GameOver();
+            GameManager.Instance.GameOverScene();
+        }
     }
 
     IEnumerator MakeVulnerableAgain()
@@ -165,9 +166,8 @@ public class PlayerController : MonoBehaviour
         invulnerable = false;
     }
 
-    IEnumerator BlinkRountine()
+    IEnumerator BlinkRountine(int t = 5)
     {
-        int t = 5;
         while (t > 0)
         {
             spriteRenderer.enabled = false;
@@ -177,6 +177,13 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(blinkRate);
             t--;
         }
+    }
+
+    public void GameOver()
+    {
+        rb.simulated = false;
+        animator.enabled = false;
+        StartCoroutine(BlinkRountine(10));
     }
 
     private void OnTriggerEnter2D(Collider2D other)
