@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     // ======================MOVEMENT======================
     void FixedUpdate()
     {

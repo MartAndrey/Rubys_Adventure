@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            PauseScene();
+        }
+    }
+
     public void LogoScene()
     {
         SetSceneState(Scenes.Logo);
@@ -68,7 +76,8 @@ public class GameManager : MonoBehaviour
         }
         else if (newScene == Scenes.Pause)
         {
-
+            PauseMenuController pauseMenu = FindObjectOfType<PauseMenuController>();
+            pauseMenu.PauseMenu();
         }
         else if (newScene == Scenes.GameOver)
         {
