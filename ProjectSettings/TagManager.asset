@@ -8,6 +8,7 @@ TagManager:
   - PowerUp
   - Bullet
   - Transition
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
