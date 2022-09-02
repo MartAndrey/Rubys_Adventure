@@ -11,8 +11,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] Sprite muteEnable;
     [SerializeField] Sprite muteDiseable;
 
-    [SerializeField] Image pauseImageEnable;
-    [SerializeField] Image pauseImageDiseable;
+    Image pauseImageEnable;
+    Image pauseImageDiseable;
 
     void Start()
     {

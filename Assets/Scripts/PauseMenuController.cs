@@ -14,6 +14,8 @@ public class PauseMenuController : MonoBehaviour
     Animator transitionScene;
 
     [SerializeField] AudioSource audioSource;
+    [SerializeField] Image pauseImageEnable;
+    [SerializeField] Image pauseImageDiseable;
 
     void Awake()
     {
@@ -28,6 +30,13 @@ public class PauseMenuController : MonoBehaviour
         transitionScene = GameObject.Find("Transition").GetComponentInChildren<Animator>();
         pauseMenu.enabled = false;
         animator = GetComponent<Animator>();
+
+        UpdateSound();
+    }
+
+    public void Continue()
+    {
+        GameManager.Instance.PauseScene();
     }
 
     public void Return()
@@ -61,5 +70,17 @@ public class PauseMenuController : MonoBehaviour
         pauseMenu.enabled = false;
         audioSource.volume = 0.5f;
         animator.enabled = false;
+    }
+
+    void UpdateSound()
+    {
+        if (AudioListener.volume == 1)
+        {
+            pauseImageEnable.enabled = true;
+        }
+        else if (AudioListener.volume == 0)
+        {
+            pauseImageDiseable.enabled = true;
+        }
     }
 }

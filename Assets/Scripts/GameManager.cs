@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             PauseMenuController pauseMenu = FindObjectOfType<PauseMenuController>();
             pauseMenu.PauseMenu();
+            
             if (currentScene == Scenes.Pause)
             {
                 newScene = Scenes.Game;
