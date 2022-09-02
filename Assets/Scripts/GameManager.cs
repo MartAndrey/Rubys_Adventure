@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum Scenes { Logo, Menu, Game, GameOver, Pause }
 
@@ -78,6 +79,10 @@ public class GameManager : MonoBehaviour
         {
             PauseMenuController pauseMenu = FindObjectOfType<PauseMenuController>();
             pauseMenu.PauseMenu();
+            if (currentScene == Scenes.Pause)
+            {
+                newScene = Scenes.Game;
+            }
         }
         else if (newScene == Scenes.GameOver)
         {

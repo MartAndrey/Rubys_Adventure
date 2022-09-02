@@ -9,6 +9,9 @@ TagManager:
   - Bullet
   - Transition
   - PauseMenu
+  - Sound
+  - Pause Sound E
+  - Pause Sound D
   layers:
   - Default
   - TransparentFX
