@@ -39,6 +39,13 @@ public class PauseMenuController : MonoBehaviour
         GameManager.Instance.PauseScene();
     }
 
+    public void MainMenu()
+    {
+        transitionScene.Play("FadeOut");
+        Time.timeScale = 1;
+        GameManager.Instance.MenuScene();
+    }
+
     public void Return()
     {
         transitionScene.Play("FadeOut");

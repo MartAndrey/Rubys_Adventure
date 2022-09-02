@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         MoveAim();
 
         // ======================BULLET========================
-        if (Input.GetMouseButton(0) && gunLoaded)
+        if (Input.GetMouseButton(0) && gunLoaded && GameManager.Instance.currentScene == Scenes.Game)
         {
             Launch();
         }

@@ -8,8 +8,8 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
 
     public Image imageSound;
-    [SerializeField] Sprite muteEnable;
-    [SerializeField] Sprite muteDiseable;
+    public Sprite muteEnable;
+    public Sprite muteDiseable;
 
     Image pauseImageEnable;
     Image pauseImageDiseable;

@@ -6,6 +6,14 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
     [SerializeField] Image imageSound;
+    Sprite sImageSound;
+
+    void Start()
+    {
+        UpdateSound();
+
+        sImageSound = imageSound.GetComponent<Sprite>();
+    }
 
     public void Play()
     {
@@ -19,5 +27,20 @@ public class MainMenuController : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+     void UpdateSound()
+    {
+        if (AudioListener.volume == 1)
+        {
+            sImageSound = SoundManager.Instance.muteEnable;
+            
+        }
+        else if (AudioListener.volume == 0)
+        {
+            sImageSound = SoundManager.Instance.muteDiseable;
+        }
+
+        imageSound.sprite = sImageSound;
     }
 }
