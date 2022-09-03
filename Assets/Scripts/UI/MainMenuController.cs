@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] Image imageSound;
     Sprite sImageSound;
+    [SerializeField] Image imageSound;
 
     void Start()
     {

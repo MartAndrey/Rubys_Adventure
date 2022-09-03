@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class Robot : MonoBehaviour
 {
+    // ======================MOVEMENT======================
     int direction = 1;
-    [SerializeField] bool vertical;
-
-    [SerializeField] float changeTimer = 3;
-    float timer;
-
-    Animator animator;
-
-    Rigidbody2D rb;
-
     float speed = 1;
+    float timer;
+    [SerializeField] bool vertical;
+    [SerializeField] float changeTimer = 3;
+
+    // ======================DAMAGE======================
     int damage = -1;
 
+    // ====================PHYSICAL=====================
+    Rigidbody2D rb;
+
+    // ====================FIXED=====================
     bool robotFixed = false;
 
-    [SerializeField] ParticleSystem smokeEffect;
+    // ====================ANIMATOR=====================
+    Animator animator;
 
+    // ====================AUDIO=====================
     AudioSource audioSource;
     [SerializeField] AudioClip hit;
     [SerializeField] AudioClip audioFixed;
+
+    // ====================PARTICLE_SYSTEM=====================
+    [SerializeField] ParticleSystem smokeEffect;
 
     void Start()
     {
@@ -49,6 +55,7 @@ public class Robot : MonoBehaviour
         }
     }
 
+    // ======================MOVEMENT======================
     void FixedUpdate()
     {
         if (robotFixed)
@@ -74,6 +81,7 @@ public class Robot : MonoBehaviour
         transform.position = position;
     }
 
+    // ====================FIXED=====================
     public void Fixed()
     {
         audioSource.Stop();
@@ -83,9 +91,10 @@ public class Robot : MonoBehaviour
         robotFixed = true;
         rb.simulated = false;
         animator.SetTrigger("Fixed");
-        smokeEffect.Stop();    
+        smokeEffect.Stop();
     }
 
+    // ======================DAMAGE======================
     private void OnCollisionEnter2D(Collision2D other)
     {
         PlayerController player = other.gameObject.GetComponent<PlayerController>();

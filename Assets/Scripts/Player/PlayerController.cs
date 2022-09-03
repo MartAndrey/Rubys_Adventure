@@ -9,31 +9,31 @@ public class PlayerController : MonoBehaviour
     public int Health { get { return currentHealth; } }
 
     // ======================MOVEMENT======================
-    public float speed = 3.0f;
     float direction;
+    public float speed = 3.0f;
 
     // =========================AIM========================
+    Vector2 lookDirection;
     [SerializeField] Transform aim;
     [SerializeField] Camera aimCamera;
-    Vector2 lookDirection;
 
     // ======================BULLET========================
-    [SerializeField] GameObject bulletPrefab;
     bool gunLoaded = true;
     [SerializeField] float fireRate = 1;
+    [SerializeField] GameObject bulletPrefab;
     //bool powerShotEnable;
 
     // ====================INVULNERABLE=====================
-    [SerializeField] float invulnerableTime = 3;
     public bool invulnerable;
+    [SerializeField] float invulnerableTime = 3;
 
     // ====================ANIMATOR=====================
     Animator animator;
 
     // ====================PHYSICAL=====================
-    Rigidbody2D rb;
     float horizontal;
     float vertical;
+    Rigidbody2D rb;
 
     SpriteRenderer spriteRenderer;
     [SerializeField] float blinkRate = 0.1f;

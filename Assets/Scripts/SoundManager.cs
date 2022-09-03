@@ -7,10 +7,12 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
+    // Main menu sound image
     public Image imageSound;
     public Sprite muteEnable;
     public Sprite muteDiseable;
 
+    // Pause menu sound image
     Image pauseImageEnable;
     Image pauseImageDiseable;
 
@@ -28,6 +30,7 @@ public class SoundManager : MonoBehaviour
 
         if (GameManager.Instance.currentScene == Scenes.Pause)
         {
+            // Pause menu sound image
             pauseImageEnable = GameObject.FindWithTag("Pause Sound E").GetComponent<Image>();
             pauseImageDiseable = GameObject.FindWithTag("Pause Sound D").GetComponent<Image>();
 
@@ -46,6 +49,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
+            // Main menu sound image
             if (AudioListener.volume == 1)
             {
                 imageSound.sprite = muteDiseable;

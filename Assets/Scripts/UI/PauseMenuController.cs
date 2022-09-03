@@ -8,15 +8,19 @@ public class PauseMenuController : MonoBehaviour
 {
     public static PauseMenuController Instance;
 
-    [SerializeField] Canvas pauseMenu;
-
+    // ====================ANIMATOR=====================
     Animator animator;
     Animator transitionScene;
 
-    [SerializeField] AudioSource audioSource;
+    // ====================CANVAS=====================
+    [SerializeField] Canvas pauseMenu;
+
+    // ====================IMAGE=====================
     [SerializeField] Image pauseImageEnable;
     [SerializeField] Image pauseImageDiseable;
 
+    // ====================SOUND=====================
+    [SerializeField] AudioSource audioSource;
     void Awake()
     {
         if (Instance == null)
@@ -53,6 +57,7 @@ public class PauseMenuController : MonoBehaviour
         GameManager.Instance.GameScene();
     }
 
+    // Transition when you press the ESC key
     public void PauseMenu()
     {
         if (!pauseMenu.enabled)
