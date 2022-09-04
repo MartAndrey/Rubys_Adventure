@@ -189,12 +189,13 @@ MonoBehaviour:
   speed: 3
   aim: {fileID: 7754575047393643480}
   aimCamera: {fileID: 0}
-  bulletPrefab: {fileID: 836346227494279163, guid: a9f7789e936fb314185b94dcb5f601c8, type: 3}
   fireRate: 1
-  invulnerableTime: 3
+  bulletPrefab: {fileID: 836346227494279163, guid: a9f7789e936fb314185b94dcb5f601c8, type: 3}
   invulnerable: 0
+  invulnerableTime: 3
   blinkRate: 0.1
   audioHit: {fileID: 8300000, guid: c7d3a91ac32abbe47a8931a8ffc37bc6, type: 3}
+  audioGameOver: {fileID: 8300000, guid: d1a4912e8a4d3a54584f6f3a73e762a4, type: 3}
 --- !u!50 &7754575049001216097
 Rigidbody2D:
   serializedVersion: 4
@@ -204,7 +205,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7754575049001216101}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
   m_Mass: 0.11198448

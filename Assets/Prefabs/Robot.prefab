@@ -171,9 +171,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertical: 0
   changeTimer: 3
-  smokeEffect: {fileID: 5469396452025262984}
   hit: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
   audioFixed: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+  smokeEffect: {fileID: 5469396452025262984}
 --- !u!82 &7734919454569992323
 AudioSource:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 7
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -205,23 +205,41 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.14285715
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -7.002809
+      outSlope: -7.002809
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      time: 0.2857143
+      value: 0.5
+      inSlope: -1.7507023
+      outSlope: -1.7507023
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5714286
+      value: 0.25
+      inSlope: -0.7791922
+      outSlope: -0.7791922
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.602301
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9958801
+      value: 0
+      inSlope: -0.19193219
+      outSlope: -0.19193219
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.61171544
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
