@@ -6,7 +6,8 @@ using TMPro;
 public class TrainingDialog : MonoBehaviour
 {
     int indexLine;
-    private float timeLine = 0.1f;
+    float delayRead = 3;
+    float timeLine = 0.1f;
 
     Animator animator;
 
@@ -21,19 +22,10 @@ public class TrainingDialog : MonoBehaviour
         Invoke("StartDialog", 5);
     }
 
-    void Update()
-    {
-        if (textDialog.text == linesDialog[indexLine])
-        {
-            NextDialogLines();
-        }
-    }
-
     void StartDialog()
     {
         panelDialog.SetActive(true);
         animator.enabled = true;
-        Invoke("StartDialogLines", 1);
     }
 
     void StartDialogLines()
@@ -48,13 +40,17 @@ public class TrainingDialog : MonoBehaviour
 
         if (indexLine < linesDialog.Length)
         {
-            imageDialog[indexLine - 1].SetActive(false);
-            StartCoroutine(StartDialogLinesRutiner(indexLine));
+            StartCoroutine(DelayToReadRutiner(indexLine));
         }
         else
         {
-            
+            EndDialogLines();
         }
+    }
+
+    void EndDialogLines()
+    {
+        StartCoroutine(EndDialogLinesRutiner());
     }
 
     IEnumerator StartDialogLinesRutiner(int indexLine)
@@ -67,6 +63,26 @@ public class TrainingDialog : MonoBehaviour
             imageDialog[indexLine].SetActive(true);
 
             yield return new WaitForSeconds(timeLine);
+
+            if (textDialog.text == linesDialog[indexLine])
+            {
+                NextDialogLines();
+            }
         }
+    }
+
+    IEnumerator EndDialogLinesRutiner()
+    {
+        yield return new WaitForSeconds(delayRead);
+
+        animator.SetTrigger("Transition");
+    }
+
+    IEnumerator DelayToReadRutiner(int indexLine)
+    {
+        yield return new WaitForSeconds(delayRead);
+
+        imageDialog[indexLine - 1].SetActive(false);
+        StartCoroutine(StartDialogLinesRutiner(indexLine));
     }
 }
