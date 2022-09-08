@@ -69,6 +69,21 @@ public class PlayerController : MonoBehaviour
             Launch();
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentScene == Scenes.Game)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(rb.position + Vector2.up, lookDirection, 3, LayerMask.GetMask("NPC"));
+
+            if (hit.collider != null )
+            {
+                NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+
+                if (character != null)
+                {
+                    character.DisplayDialog();
+                }
+            }
+        }
+
         // ====================ANIMATOR=====================
         animator.SetFloat("Look X", lookDirection.x);
         animator.SetFloat("Look Y", lookDirection.y);

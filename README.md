@@ -8,4 +8,6 @@ Platzi's Unity Course Project ""
 - Cinemachine
 - Prefabs
 - Canvas
-- Particle System
+- Particle system
+- Scene changes
+- Dialogue system
