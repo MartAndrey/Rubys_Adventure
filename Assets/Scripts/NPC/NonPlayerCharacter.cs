@@ -13,6 +13,12 @@ public class NonPlayerCharacter : MonoBehaviour
         exclamation.enabled = false;
         dialogue.SetActive(true);
     }
+
+    public void HideDialog()
+    {
+        exclamation.enabled = true;
+        dialogue.SetActive(false);
+    }
     
     void OnTriggerEnter2D(Collider2D other)
     {
