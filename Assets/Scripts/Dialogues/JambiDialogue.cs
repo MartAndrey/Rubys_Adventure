@@ -84,7 +84,9 @@ public class JambiDialogue : MonoBehaviour
     IEnumerator EndDialogueRutiner()
     {
         yield return new WaitForSeconds(delayRead);
-        
+
+        textDialogue.text = string.Empty;
+
         imageYes.SetActive(false);
         imageNot.SetActive(false);
 

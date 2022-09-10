@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera aimCamera;
 
     // ======================BULLET========================
-    bool gunLoaded = true;
+    public bool GunLoaded { get; set; }
     [SerializeField] float fireRate = 1;
     [SerializeField] GameObject bulletPrefab;
     //bool powerShotEnable;
@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        GunLoaded = true;
+        
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -64,7 +66,7 @@ public class PlayerController : MonoBehaviour
         MoveAim();
 
         // ======================BULLET========================
-        if (Input.GetMouseButton(0) && gunLoaded && GameManager.Instance.currentScene == Scenes.Game)
+        if (Input.GetMouseButton(0) && GunLoaded && GameManager.Instance.currentScene == Scenes.Game)
         {
             Launch();
         }
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour
     // ======================BULLET========================
     void Launch()
     {
-        gunLoaded = false;
+        GunLoaded = false;
         GameObject projectileObject = Instantiate(bulletPrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
 
         animator.SetTrigger("Lauch");
@@ -146,7 +148,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator ReloadGun()
     {
         yield return new WaitForSeconds(1 / fireRate);
-        gunLoaded = true;
+        GunLoaded = true;
     }
 
     // =======================HEALTH=======================
