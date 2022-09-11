@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     int maxHealth = 5;
     int currentHealth;
     public int Health { get { return currentHealth; } }
+    [SerializeField] ParticleSystem hitParticle;
 
     // ======================MOVEMENT======================
     float direction;
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource;
     [SerializeField] AudioClip audioHit;
     [SerializeField] AudioClip audioGameOver;
-
+    
     void Start()
     {
         currentHealth = maxHealth;
@@ -162,6 +163,7 @@ public class PlayerController : MonoBehaviour
             camController.Shake();
             animator.SetTrigger("Hit");
             PlayAudio(audioHit);
+            Instantiate(hitParticle, transform.position + Vector3.up * 0.5f, Quaternion.identity);
 
             StartCoroutine(MakeVulnerableAgain());
         }

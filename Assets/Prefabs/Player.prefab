@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a6d817bcbe6b540a6d06b345ea581f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitParticle: {fileID: 3032662816014629373, guid: 62d5193ed8a148645a1c20b7d79f5bf0, type: 3}
   speed: 3
   aim: {fileID: 7754575047393643480}
   aimCamera: {fileID: 0}

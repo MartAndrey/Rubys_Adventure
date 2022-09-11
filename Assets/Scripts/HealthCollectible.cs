@@ -8,6 +8,8 @@ public class HealthCollectible : MonoBehaviour
 
     AudioSource audioSource;
 
+    [SerializeField] ParticleSystem pickUp;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -19,6 +21,7 @@ public class HealthCollectible : MonoBehaviour
 
         if (controller != null && controller.Health < 5)
         {
+            Instantiate(pickUp, transform.position, Quaternion.identity);
             audioSource.Play();
             controller.ChangeHealth(amount);
             Destroy(gameObject, 0.3f);
