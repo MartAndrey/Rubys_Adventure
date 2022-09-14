@@ -13,6 +13,7 @@ TagManager:
   - Pause Sound E
   - Pause Sound D
   - NPC
+  - Collectible
   layers:
   - Default
   - TransparentFX

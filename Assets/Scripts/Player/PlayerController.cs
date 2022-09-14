@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,10 +20,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera aimCamera;
 
     // ======================BULLET========================
+    public int AmmoBullet { get; set; }
+    public bool HasAmmo { get; set; }
     public bool GunLoaded { get; set; }
     [SerializeField] float fireRate = 1;
     [SerializeField] GameObject bulletPrefab;
-    //bool powerShotEnable;
+    [SerializeField] GameObject OutOfAmmoText;
+    [SerializeField] TMP_Text textBullet;
 
     // ====================INVULNERABLE=====================
     public bool invulnerable;
@@ -46,12 +50,16 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource;
     [SerializeField] AudioClip audioHit;
     [SerializeField] AudioClip audioGameOver;
-    
+
     void Start()
     {
         currentHealth = maxHealth;
         GunLoaded = true;
-        
+        HasAmmo = false;
+        AmmoBullet = 0;
+
+        UpdateUIAmmoBullet();
+
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -69,14 +77,18 @@ public class PlayerController : MonoBehaviour
         // ======================BULLET========================
         if (Input.GetMouseButton(0) && GunLoaded && GameManager.Instance.currentScene == Scenes.Game)
         {
-            Launch();
+            if (HasAmmo)
+                Launch();
+            else
+                if (OutOfAmmoText.activeSelf == false)
+                    StartCoroutine(OutOfAmmoTextRutiner());
         }
 
         if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentScene == Scenes.Game)
         {
             RaycastHit2D hit = Physics2D.Raycast(rb.position + Vector2.up, lookDirection, 3, LayerMask.GetMask("NPC"));
 
-            if (hit.collider != null )
+            if (hit.collider != null)
             {
                 NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
 
@@ -142,14 +154,32 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Lauch");
         Bullet projectile = projectileObject.GetComponent<Bullet>();
         projectile.Launch(lookDirection, 300);
+        AmmoBullet += -1;
 
+        UpdateUIAmmoBullet();
         StartCoroutine(ReloadGun());
+
+        if (AmmoBullet <= 0)
+            HasAmmo = false;
+        
     }
 
     IEnumerator ReloadGun()
     {
         yield return new WaitForSeconds(1 / fireRate);
         GunLoaded = true;
+    }
+
+    public void UpdateUIAmmoBullet()
+    {
+        textBullet.text = AmmoBullet.ToString();
+    }
+
+    IEnumerator OutOfAmmoTextRutiner()
+    {
+        OutOfAmmoText.SetActive(true);
+        yield return new WaitForSeconds(2);
+        OutOfAmmoText.SetActive(false);
     }
 
     // =======================HEALTH=======================
@@ -208,19 +238,24 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PowerUp"))
+        if (other.CompareTag("Collectible"))
         {
-            switch (other.GetComponent<PowerUp>().powerUpType)
+            Collectible collectible = other.GetComponent<Collectible>();
+
+            switch (other.GetComponent<Collectible>().typeCollectible)
             {
-                case PowerUp.PowerUpType.FireRateIncrease:
-                    fireRate++;
+                case Collectible.TypeCollectible.HealthCollectible:
+                    if (Health >= maxHealth)
+                        return;
+
+                    collectible.HealthCollectible();
                     break;
 
-                case PowerUp.PowerUpType.PowerShort:
-                    //powerShotEnable = true;
+                case Collectible.TypeCollectible.AmmoCollectible:
+                    collectible.AmmoCollectible();
                     break;
             }
-            Destroy(other.gameObject, 0.1f);
+            Destroy(other.gameObject, 0.6f);
         }
     }
 
