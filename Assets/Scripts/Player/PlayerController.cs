@@ -161,7 +161,6 @@ public class PlayerController : MonoBehaviour
 
         if (AmmoBullet <= 0)
             HasAmmo = false;
-        
     }
 
     IEnumerator ReloadGun()

@@ -11,10 +11,12 @@ public class JambiDialogue : MonoBehaviour
 
     Animator animator;
 
+    [SerializeField] int jambiNumber;
     [SerializeField] NonPlayerCharacter jambi;
     [SerializeField] TMP_Text textDialogue;
     [SerializeField] GameObject imageYes;
     [SerializeField] GameObject imageNot;
+    [SerializeField] GameObject collectableAmmoUI;
     [SerializeField, TextArea(2, 6)] string[] linesDialogue;
 
     void Start()
@@ -58,10 +60,14 @@ public class JambiDialogue : MonoBehaviour
 
             if (textDialogue.text == linesDialogue[indexLine])
             {
-                if (textDialogue.text == linesDialogue[1])
+                if (textDialogue.text == linesDialogue[1] && jambiNumber == 0)
                 {
                     imageYes.SetActive(true);
                     imageNot.SetActive(true);
+                }
+                else if (textDialogue.text == linesDialogue[2] && jambiNumber == 1)
+                {
+                    StartCoroutine(CollectableAmmoUIRutiner());
                 }
                 else
                 {
@@ -95,5 +101,18 @@ public class JambiDialogue : MonoBehaviour
         yield return new WaitForSeconds(delayRead);
 
         jambi.HideDialog();
+    }
+
+    IEnumerator CollectableAmmoUIRutiner()
+    {
+        PlayerController player = FindObjectOfType<PlayerController>();
+        collectableAmmoUI.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        player.AmmoBullet += 5;
+        player.HasAmmo = true;
+        player.UpdateUIAmmoBullet();
+        EndDialogue();
     }
 }
