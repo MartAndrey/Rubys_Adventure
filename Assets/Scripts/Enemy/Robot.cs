@@ -99,6 +99,14 @@ public class Robot : MonoBehaviour
         EnemiesDefeated += 1;
     }
 
+    public void Unfixed()
+    {
+        robotFixed = false;
+        rb.simulated = true;
+        animator.Play("Walk");
+        smokeEffect.Play();
+    }
+
     // ======================DAMAGE======================
     private void OnCollisionEnter2D(Collision2D other)
     {

@@ -149,6 +149,10 @@ public class JambiDialogue : MonoBehaviour
         player.AmmoBullet = 999999999;
         player.HasAmmo = true;
 
-
+        GameObject[] robots = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(var i in robots)
+        {
+            i.GetComponent<Robot>().Unfixed();
+        }
     }
 }
