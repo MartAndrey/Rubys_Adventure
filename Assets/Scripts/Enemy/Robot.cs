@@ -5,14 +5,14 @@ using UnityEngine;
 public class Robot : MonoBehaviour
 {
     // ======================MOVEMENT======================
-    int direction = 1;
-    float speed = 1;
     float timer;
+    int direction = 1;
+    [SerializeField] float speed = 1;
     [SerializeField] bool vertical;
     [SerializeField] float changeTimer = 3;
 
     // ======================DAMAGE======================
-    int damage = -1;
+    [SerializeField] int damage = -1;
 
     // ====================PHYSICAL=====================
     Rigidbody2D rb;
@@ -31,11 +31,15 @@ public class Robot : MonoBehaviour
     // ====================PARTICLE_SYSTEM=====================
     [SerializeField] ParticleSystem smokeEffect;
 
+    int allEnemies = 13;
+    public static int EnemiesDefeated { get; set; }
+
     void Start()
     {
+        EnemiesDefeated = 0;
+        rb = GetComponent<Rigidbody2D>();
         timer = changeTimer;
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -92,6 +96,7 @@ public class Robot : MonoBehaviour
         rb.simulated = false;
         animator.SetTrigger("Fixed");
         smokeEffect.Stop();
+        EnemiesDefeated += 1;
     }
 
     // ======================DAMAGE======================

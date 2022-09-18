@@ -10,10 +10,13 @@ public class JambiDialogue : MonoBehaviour
     float timeLine = 0.1f;
 
     Animator animator;
+    PlayerController player;
 
     [SerializeField] int jambiNumber;
     [SerializeField] NonPlayerCharacter jambi;
     [SerializeField] TMP_Text textDialogue;
+    [SerializeField] GameObject imageInfiniteBullet;
+    [SerializeField] GameObject textBulletAmmo;
     [SerializeField] GameObject imageYes;
     [SerializeField] GameObject imageNot;
     [SerializeField] GameObject collectableAmmoUI;
@@ -21,13 +24,31 @@ public class JambiDialogue : MonoBehaviour
 
     void Start()
     {
+        player = FindObjectOfType<PlayerController>();
+
         animator = GetComponent<Animator>();
     }
 
     void StartDialogue()
     {
         indexLine = 0;
-        StartCoroutine(StartDialogueRutiner(indexLine));
+
+        if (jambiNumber == 2)
+        {
+            if (Robot.EnemiesDefeated >= 13)
+            {
+                StartCoroutine(StartDialogueRutiner(indexLine));
+            }
+            else
+            {
+                textDialogue.text = "First you have to defeat all the enemies.";
+                StartCoroutine(EndDialogueRutiner());
+            }
+        }
+        else
+        {
+            StartCoroutine(StartDialogueRutiner(indexLine));
+        }
     }
 
     public void NextDialog()
@@ -101,11 +122,15 @@ public class JambiDialogue : MonoBehaviour
         yield return new WaitForSeconds(delayRead);
 
         jambi.HideDialog();
+
+        if (jambiNumber == 2 && Robot.EnemiesDefeated >= 13)
+        {
+            InfiniteBullet();
+        }
     }
 
     IEnumerator CollectableAmmoUIRutiner()
     {
-        PlayerController player = FindObjectOfType<PlayerController>();
         collectableAmmoUI.SetActive(true);
 
         yield return new WaitForSeconds(1);
@@ -114,5 +139,16 @@ public class JambiDialogue : MonoBehaviour
         player.HasAmmo = true;
         player.UpdateUIAmmoBullet();
         EndDialogue();
+    }
+
+    void InfiniteBullet()
+    {
+        textBulletAmmo.SetActive(false);
+        imageInfiniteBullet.SetActive(true);
+
+        player.AmmoBullet = 999999999;
+        player.HasAmmo = true;
+
+
     }
 }

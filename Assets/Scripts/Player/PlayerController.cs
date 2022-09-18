@@ -90,11 +90,11 @@ public class PlayerController : MonoBehaviour
 
             if (hit.collider != null)
             {
-                NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+                NonPlayerCharacter npc = hit.collider.GetComponent<NonPlayerCharacter>();
 
-                if (character != null)
+                if (npc != null)
                 {
-                    character.DisplayDialog();
+                    npc.DisplayDialog();
                 }
             }
         }
