@@ -45238,8 +45238,8 @@ Tilemap:
   - first: {x: 82, y: -2, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 23
-      m_TileSpriteIndex: 23
+      m_TileIndex: 24
+      m_TileSpriteIndex: 24
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -81153,9 +81153,9 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: b905ebea42732194b976f4b94e63882f, type: 2}
   - m_RefCount: 26
     m_Data: {fileID: 11400000, guid: e16a2075575b8cc4f96260ba02e2c2a1, type: 2}
-  - m_RefCount: 32
+  - m_RefCount: 31
     m_Data: {fileID: 11400000, guid: 47a45cd7b358e5747a2b2cbd49555769, type: 2}
-  - m_RefCount: 26
+  - m_RefCount: 27
     m_Data: {fileID: 11400000, guid: 74da8c008b743e545afdf59cdfbae516, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 8c9b2598883e1414f9fbb5ad11c2699b, type: 2}
@@ -81264,9 +81264,9 @@ Tilemap:
     m_Data: {fileID: -1305840523, guid: 2e6ecdf01ba70e3489b17b3f6525fec2, type: 3}
   - m_RefCount: 26
     m_Data: {fileID: 2056264919, guid: 2e6ecdf01ba70e3489b17b3f6525fec2, type: 3}
-  - m_RefCount: 32
+  - m_RefCount: 31
     m_Data: {fileID: 102403893, guid: 2e6ecdf01ba70e3489b17b3f6525fec2, type: 3}
-  - m_RefCount: 26
+  - m_RefCount: 27
     m_Data: {fileID: 1240560137, guid: 2e6ecdf01ba70e3489b17b3f6525fec2, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 1282207238, guid: 56dfe645f43c419458abb426118088e5, type: 3}
@@ -88539,7 +88539,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!1 &1685731709
 GameObject:
   m_ObjectHideFlags: 0
@@ -99787,6 +99787,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7754575047393643481, guid: 559bee9cb485bdb4eb46cd75b47e4319, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7754575049001216096, guid: 559bee9cb485bdb4eb46cd75b47e4319, type: 3}
       propertyPath: aimCamera
       value: 
