@@ -5,7 +5,9 @@
 This is a 2D adventure video game , it is currently a prototype, Assets are owned by Unity Technologies.   
 It is available for web, Windows and Linux, you can also download it.
 
-Note: this project is not intended to be commercialized, it was made for a portfolio.  
+Note: this project is not intended to be commercialized, it was made for a portfolio. 
+
+You can see the Video Game created [Here](https://martandrey.itch.io/rubys-adventure)
 
 ## Contents:
 - [Demo](#demo)
